@@ -1,0 +1,21 @@
+{
+  "name": "testception",
+  "version": "0.0.1",
+  "main": "dist/testception.js",
+  "license": "MIT",
+  "ignore": [
+    "test",
+    ".bowerrc",
+    ".gitignore",
+    ".jscsrc",
+    ".jshintrc",
+    ".travis.yml",
+    "bower.json",
+    "Gruntfile.js",
+    "karma.conf.js",
+    "package.json",
+    "wallaby.conf.js"
+  ],
+  "dependencies": {},
+  "devDependencies": {}
+}
