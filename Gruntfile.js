@@ -86,7 +86,7 @@ module.exports = function (grunt) {
         cwd: 'src/',
         src: '*.js', // dist when using concat
         dest: 'dist',
-        ext: '.x.min.js'
+        ext: '.min.js'
       }
     },
     karma: {
@@ -104,6 +104,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', ['test', 'clean', 'uglify']);
   grunt.registerTask('test', ['jscs', 'jshint', 'lintspaces', 'karma', 'coverage']);
-  grunt.registerTask('default', ['test']);
+  grunt.registerTask('default', ['build']);
 
 };
