@@ -19,6 +19,6 @@
   "smarttabs": true,
   "jasmine": true,
   "globals": {
-    "expectMatcher": false
+    "expectMatcher": true
   }
 }

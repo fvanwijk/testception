@@ -3,10 +3,17 @@
  * @param {Object} matcher to test
  * @returns {Object} test
  */
-function expectMatcher(matcher) {
+var expectMatcher = function expectMatcher(matcher) {
   function runTest() {
-    expect(test.matcher().compare(test.actual, test.expected))
-      .toEqual({ pass: test.pass, message: test.message });
+    if (expectMatcher.jasmineVersion === 2) {
+      expect(test.matcher().compare(test.actual, test.expected))
+        .toEqual({ pass: test.pass, message: test.expectedMessage });
+    } else if (expectMatcher.jasmineVersion === 1) {
+      expect(test.matcher(test.expected)).toEqual(test.pass);
+      expect(test.message()[test.pass ? 1 : 0]).toEqual(test.expectedMessage);
+    } else {
+      throw Error('Incorrect Jasmine version specified: ' + expectMatcher.jasmineVersion);
+    }
   }
 
   var test = {
@@ -34,7 +41,7 @@ function expectMatcher(matcher) {
   };
 
   test.withMessage = function (message) {
-    test.message = message;
+    test.expectedMessage = message;
 
     runTest();
 
@@ -47,4 +54,6 @@ function expectMatcher(matcher) {
   };
 
   return test;
-}
+};
+
+expectMatcher.jasmineVersion = 2;
