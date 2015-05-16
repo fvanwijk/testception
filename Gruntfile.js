@@ -102,7 +102,7 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('build', ['test', 'clean', 'uglify']);
+  grunt.registerTask('build', ['clean', 'test', 'uglify']);
   grunt.registerTask('test', ['jscs', 'jshint', 'lintspaces', 'karma', 'coverage']);
   grunt.registerTask('default', ['build']);
 
