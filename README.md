@@ -8,7 +8,7 @@ Testception
 Most people test their custom Jasmine matchers by setting up test suite with mock data.
 The matcher is used with the mock data and if the matcher is implemented correctly, no test fails.
 
-```
+```javascript
 it('should pass when the actual and expected are equal', function () {
   expect({}).toEqual({});
 });
@@ -21,8 +21,7 @@ Still the generated error messages for a failing test are not verified.
 Therefore, you need to test a matcher by testing the matcher function itself.
 This a already done with the matchers of Jasmine itself.
 
-This DSL helps you
-
+This DSL helps you with testing Jasmine 1 and 2 matchers by just using one statement.
 
 # Installing
 
@@ -32,12 +31,12 @@ Include dist/testception.min.js file in the files list of your test runner confi
 
 # Documentation
 
-First of all, you need the matcher in your test file. This is object that is passed to Jasmine's `addMatchers` method.
+First of all, you need the matcher in your test file. This is the object that is passed to Jasmine's `addMatchers` method.
 It is the `matcher` in `addMatchers({ matcherName: matcher })`.
 
 Then test the matcher by using the DSL:
 
-```
+```javascript
 // Test subject is a custom toEqual matcher
 var test = expectMatcher(matcher)
   .withActual({})
@@ -54,18 +53,24 @@ expectMatcher(matcher)
 
 Modify your test and rerun it:
 
-```
+```javascript
 test
   .withActual([])
   .andExpected([])
   .withSameMessage();
 ```
 
+Testception expects your matcher to be a Jasmine 2 matcher by default. When you want to test a Jasmine 1 matcher,
+call:
+
+```javascript
+expectMatcher.jasmineVersion = 1;
+```
+
 # TODO
 
 - Injecting util and customEqualityTesters in tested matcher
 - Test custom negative comparators
-- Test Jasmine 1.x matchers as well
 
 # Development
 
