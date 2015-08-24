@@ -6,10 +6,12 @@
 var expectMatcher = function expectMatcher(matcher) {
   function runTest() {
     if (expectMatcher.jasmineVersion === 2) {
-      expect(test.matcher().compare(test.actual, test.expected))
+      var args = [test.actual].concat(test.expected);
+      expect(test.matcher().compare.apply(this, args))
         .toEqual({ pass: test.pass, message: test.expectedMessage });
     } else if (expectMatcher.jasmineVersion === 1) {
-      expect(test.matcher(test.expected)).toEqual(test.pass);
+      expect(test.matcher.apply(test, test.expected)).toEqual(test.pass);
+      // Jasmine 1 adds the message to 'this' (the test in this case)
       expect(test.message()[test.pass ? 1 : 0]).toEqual(test.expectedMessage);
     } else {
       throw Error('Incorrect Jasmine version specified: ' + expectMatcher.jasmineVersion);
@@ -26,7 +28,7 @@ var expectMatcher = function expectMatcher(matcher) {
   };
 
   test.andExpected = function (expected) {
-    test.expected = expected;
+    test.expected = Array.prototype.slice.call(arguments, 0);
     return test;
   };
 

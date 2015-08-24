@@ -47,7 +47,7 @@ describe('the Testception DSL', function () {
   });
 
   it('should set the expected', function () {
-    expect(expectMatcher().andExpected('expected').expected).toBe('expected');
+    expect(expectMatcher().andExpected('expected', 'more-args').expected).toEqual(['expected', 'more-args']);
   });
 
   describe('when you expect a pass or fail', function () {
