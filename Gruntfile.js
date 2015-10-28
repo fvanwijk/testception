@@ -38,26 +38,6 @@ module.exports = function (grunt) {
         src: ['<%= paths.test %>/spec/*.js']
       }
     },
-
-    lintspaces: {
-      options: {
-        newline: true,
-        newlineMaximum: 1,
-        trailingspaces: true
-      },
-      all: {
-        src: [
-          'Gruntfile.js',
-          '<%= paths.src %>/{,**/}*.js'
-        ]
-      },
-      test: {
-        src: [
-          'test/{,**/}*.js'
-        ]
-      }
-    },
-
     coverage: {
       dist: {
         options: {
@@ -111,7 +91,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('build', ['clean', 'test', 'uglify']);
-  grunt.registerTask('test', ['jscs', 'jshint', 'lintspaces', 'karma', 'coverage']);
+  grunt.registerTask('test', ['jscs', 'jshint', 'karma', 'coverage']);
   grunt.registerTask('default', ['build']);
 
 };
