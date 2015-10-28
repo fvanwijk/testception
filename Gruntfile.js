@@ -17,25 +17,28 @@ module.exports = function (grunt) {
         jshintrc: '.jshintrc',
         reporter: require('jshint-stylish')
       },
-      all: {
-        src: [
-          'Gruntfile.js',
-          '<%= paths.src %>/**/*.js',
-          '<%= paths.test %>/spec/*.js'
-        ]
+      src: {
+        src: '<%= paths.src %>/**/*.js'
+      },
+      test: {
+        src: '<%= paths.test %>/spec/*.js'
+      },
+      gruntfile: {
+        src: 'Gruntfile.js'
       }
     },
     jscs: {
       options: {
         config: './.jscsrc'
       },
-      all: {
-        files: {
-          src: ['<%= paths.src %>/**/*.js']
-        }
+      src: {
+        src: '<%= paths.src %>/**/*.js'
       },
       test: {
-        src: ['<%= paths.test %>/spec/*.js']
+        src: '<%= paths.test %>/spec/*.js'
+      },
+      gruntfile: {
+        src: 'Gruntfile.js'
       }
     },
     coverage: {
@@ -54,9 +57,7 @@ module.exports = function (grunt) {
     },
     concat: {
       dist: {
-        src: [
-          '<%= paths.src %>/**/*.js'
-        ],
+        src: '<%= paths.src %>/**/*.js',
         dest: 'dist/<%= pkg.name %>.js'
       }
     },
