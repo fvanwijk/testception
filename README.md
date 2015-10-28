@@ -4,6 +4,7 @@ Testception
 [![Build Status](https://travis-ci.org/fvanwijk/testception.svg?branch=master)](https://travis-ci.org/fvanwijk/testception)
 [![Test Coverage](https://codeclimate.com/github/fvanwijk/testception/badges/coverage.svg)](https://codeclimate.com/github/fvanwijk/testception)
 [![Code Climate](https://codeclimate.com/github/fvanwijk/testception/badges/gpa.svg)](https://codeclimate.com/github/fvanwijk/testception)
+[![devDependency Status](https://david-dm.org/fvanwijk/testception/dev-status.svg)](https://david-dm.org/fvanwijk/testception#info=devDependencies)
 
 Most people test their custom Jasmine matchers by setting up test suite with mock data.
 The matcher is used with the mock data and if the matcher is implemented correctly, no test fails.
