@@ -1,6 +1,7 @@
 {
   "name": "testception",
   "version": "0.2.0",
+  "author": "Frank van Wijk <f.e.vanwijk@xebia.com>",
   "main": "dist/testception.js",
   "license": "MIT",
   "ignore": [

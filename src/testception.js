@@ -4,6 +4,10 @@
  * @returns {Object} test
  */
 var expectMatcher = function expectMatcher(matcher) {
+  var test = {
+    matcher: matcher
+  };
+
   function runTest() {
     if (expectMatcher.jasmineVersion === 2) {
       var args = [test.actual].concat(test.expected);
@@ -17,10 +21,6 @@ var expectMatcher = function expectMatcher(matcher) {
       throw Error('Incorrect Jasmine version specified: ' + expectMatcher.jasmineVersion);
     }
   }
-
-  var test = {
-    matcher: matcher
-  };
 
   test.withActual = function (actual) {
     test.actual = actual;
