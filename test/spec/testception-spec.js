@@ -1,3 +1,5 @@
+import {expectMatcher} from '../../src/testception';
+
 /**
  * For the specs to pass, simple incomplete examples are sufficient,
  * but since the DSL does expectations itself after calling withMessage() or withSameMessage(),

@@ -1,6 +1,6 @@
 module.exports = [
   {
-    type: 'lib',
+    type: 'src',
     files: [
       'src/testception.js'
     ]

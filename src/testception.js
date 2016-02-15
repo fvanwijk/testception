@@ -1,10 +1,12 @@
+'use strict';
+
 /**
  * DSL for testing Jasmine 2 matchers.
  * @param {Object} matcher to test
  * @returns {Object} test
  */
-var expectMatcher = function expectMatcher(matcher) {
-  var test = {
+export function expectMatcher(matcher) {
+  let test = {
     matcher: matcher
   };
 
