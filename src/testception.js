@@ -12,7 +12,7 @@ export function expectMatcher(matcher) {
 
   function runTest() {
     if (expectMatcher.jasmineVersion === 2) {
-      var args = [test.actual].concat(test.expected);
+      let args = [test.actual].concat(test.expected);
       expect(test.matcher().compare.apply(this, args))
         .toEqual({ pass: test.pass, message: test.expectedMessage });
     } else if (expectMatcher.jasmineVersion === 1) {
@@ -24,7 +24,7 @@ export function expectMatcher(matcher) {
     }
   }
 
-  test.withActual = function (actual) {
+  test.withActual = actual => {
     test.actual = actual;
     return test;
   };
@@ -34,17 +34,17 @@ export function expectMatcher(matcher) {
     return test;
   };
 
-  test.toPass = function () {
+  test.toPass = () => {
     test.pass = true;
     return test;
   };
 
-  test.toFail = function () {
+  test.toFail = () => {
     test.pass = false;
     return test;
   };
 
-  test.withMessage = function (message) {
+  test.withMessage = message => {
     test.expectedMessage = message;
 
     runTest();
@@ -52,12 +52,12 @@ export function expectMatcher(matcher) {
     return test;
   };
 
-  test.withSameMessage = function () {
+  test.withSameMessage = () => {
     runTest();
     return test;
   };
 
   return test;
-};
+}
 
 expectMatcher.jasmineVersion = 2;

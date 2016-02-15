@@ -5,78 +5,76 @@ import {expectMatcher} from '../../src/testception';
  * but since the DSL does expectations itself after calling withMessage() or withSameMessage(),
  * all specs need to be full working examples.
  */
-describe('the Testception DSL', function () {
+describe('the Testception DSL', () => {
 
   // These mock matchers pass when expected is true
-  var mockMatcher1 = jasmine.createSpy('Jasmine 1 matcher').and.callFake(function (pass) {
-    this.message = function () {
+  const mockMatcher1 = jasmine.createSpy('Jasmine 1 matcher').and.callFake(function (pass) {
+    this.message = () => {
       return ['jasmine 1 fail message', 'jasmine 1 pass message'];
     };
     return pass;
   });
 
-  var compareSpy = jasmine.createSpy('Compare function for jasmine 2 matcher').and.callFake(function (actual, pass) {
+  const compareSpy = jasmine.createSpy('Compare function for jasmine 2 matcher').and.callFake(function (actual, pass) {
     return {
       pass: pass,
       message: 'jasmine 2 pass message'
     };
   });
-  var mockMatcher2 = function () {
-    return {
-      compare: compareSpy
-    };
-  };
+  const mockMatcher2 = () => ({
+    compare: compareSpy
+  });
 
-  describe('the jasmine version', function () {
+  describe('the jasmine version', () => {
 
-    it('should test matchers for jasmine 2 by default', function () {
+    it('should test matchers for jasmine 2 by default', () => {
       expect(expectMatcher.jasmineVersion).toBe(2);
     });
 
-    it('should throw an error when the jasmine version is not 1 or 2', function () {
+    it('should throw an error when the jasmine version is not 1 or 2', () => {
       expectMatcher.jasmineVersion = 0;
       expect(expectMatcher().withSameMessage).toThrowError(Error, 'Incorrect Jasmine version specified: ' + 0);
       expectMatcher.jasmineVersion = 2;
     });
   });
 
-  it('should register the matcher', function () {
+  it('should register the matcher', () => {
     expect(expectMatcher('matcher').matcher).toBe('matcher');
   });
 
-  it('should set the actual', function () {
+  it('should set the actual', () => {
     expect(expectMatcher().withActual('actual').actual).toBe('actual');
   });
 
-  it('should set the expected', function () {
+  it('should set the expected', () => {
     expect(expectMatcher().andExpected('expected', 'more-args').expected).toEqual(['expected', 'more-args']);
   });
 
-  describe('when you expect a pass or fail', function () {
-    it('should set pass to true', function () {
+  describe('when you expect a pass or fail', () => {
+    it('should set pass to true', () => {
       expect(expectMatcher().toPass().pass).toBe(true);
     });
 
-    it('should set pass to false', function () {
+    it('should set pass to false', () => {
       expect(expectMatcher().toFail().pass).toBe(false);
     });
   });
 
-  describe('when passing the message', function () {
+  describe('when passing the message', () => {
 
-    it('should set the message', function () {
+    it('should set the message', () => {
       expect(expectMatcher(mockMatcher2)
         .andExpected(true)
         .toPass()
         .withMessage('jasmine 2 pass message').expectedMessage).toBe('jasmine 2 pass message');
     });
 
-    describe('and when the matcher is for Jasmine 1', function () {
-      beforeAll(function () {
+    describe('and when the matcher is for Jasmine 1', () => {
+      beforeAll(() => {
         expectMatcher.jasmineVersion = 1;
       });
 
-      it('should test the matcher with given parameters', function () {
+      it('should test the matcher with given parameters', () => {
         var expected = true;
         expectMatcher(mockMatcher1)
           .withActual('actual')
@@ -87,14 +85,14 @@ describe('the Testception DSL', function () {
         expect(mockMatcher1).toHaveBeenCalledWith(expected);
       });
 
-      afterAll(function () {
+      afterAll(() => {
         expectMatcher.jasmineVersion = 2;
       });
     });
 
-    describe('and when the matcher is for Jasmine 2', function () {
+    describe('and when the matcher is for Jasmine 2', () => {
 
-      it('should test the matcher with given parameters', function () {
+      it('should test the matcher with given parameters', () => {
         var expected = true;
         expectMatcher(mockMatcher2)
           .withActual('actual')
@@ -107,14 +105,14 @@ describe('the Testception DSL', function () {
     });
   });
 
-  describe('when requesting a new test with the same message', function () {
+  describe('when requesting a new test with the same message', () => {
 
-    describe('and when the matcher is for Jasmine 1', function () {
-      beforeAll(function () {
+    describe('and when the matcher is for Jasmine 1', () => {
+      beforeAll(() => {
         expectMatcher.jasmineVersion = 1;
       });
 
-      it('should return the pass message when it passes', function () {
+      it('should return the pass message when it passes', () => {
         var expected = true;
         var test = expectMatcher(mockMatcher1)
           .withActual('actual')
@@ -128,7 +126,7 @@ describe('the Testception DSL', function () {
         expect(mockMatcher1).toHaveBeenCalledWith(expected);
       });
 
-      it('should return the fail message when it fails', function () {
+      it('should return the fail message when it fails', () => {
         var expected = false;
         var test = expectMatcher(mockMatcher1)
           .withActual('actual')
@@ -142,14 +140,14 @@ describe('the Testception DSL', function () {
         expect(mockMatcher1).toHaveBeenCalledWith(expected);
       });
 
-      afterAll(function () {
+      afterAll(() => {
         expectMatcher.jasmineVersion = 2;
       });
     });
 
-    describe('and when the matcher is for Jasmine 2', function () {
+    describe('and when the matcher is for Jasmine 2', () => {
 
-      it('should rerun the test', function () {
+      it('should rerun the test', () => {
         var expected = true;
         var test = expectMatcher(mockMatcher2)
           .withActual('actual')
