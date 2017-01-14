@@ -18,6 +18,12 @@ module.exports = function (wallaby) {
 
     bootstrap: function () {
       window.__moduleBundler.loadTests();
+    },
+    env: {
+      runner: require('phantomjs2-ext').path,
+      params: {
+        runner: '--web-security=false'
+      }
     }
   };
 };

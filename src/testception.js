@@ -13,7 +13,7 @@ export function expectMatcher(matcher) {
   function runTest() {
     if (expectMatcher.jasmineVersion === 2) {
       let args = [test.actual].concat(test.expected);
-      expect(test.matcher().compare.apply(this, args))
+      expect(test.matcher().compare.apply(null, args))
         .toEqual({ pass: test.pass, message: test.expectedMessage });
     } else if (expectMatcher.jasmineVersion === 1) {
       expect(test.matcher.apply(test, test.expected)).toEqual(test.pass);
