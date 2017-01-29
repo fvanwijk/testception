@@ -1,10 +1,9 @@
-Testception
-================
+# Testception
 
 [![Build Status](https://travis-ci.org/fvanwijk/testception.svg?branch=master)](https://travis-ci.org/fvanwijk/testception)
 [![Test Coverage](https://codeclimate.com/github/fvanwijk/testception/badges/coverage.svg)](https://codeclimate.com/github/fvanwijk/testception)
 [![Code Climate](https://codeclimate.com/github/fvanwijk/testception/badges/gpa.svg)](https://codeclimate.com/github/fvanwijk/testception)
-[![devDependency Status](https://david-dm.org/fvanwijk/testception/dev-status.svg)](https://david-dm.org/fvanwijk/testception#info=devDependencies)
+[![devDependency Status](https://david-dm.org/fvanwijk/testception/dev-status.svg)](https://david-dm.org/fvanwijk/testception?type=dev)
 
 Most people test their custom Jasmine matchers by setting up test suite with mock data.
 The matcher is used with the mock data and if the matcher is implemented correctly, no test fails.
@@ -24,7 +23,7 @@ This a already done with the matchers of Jasmine itself.
 
 This DSL helps you with testing Jasmine 1 and 2 matchers by just using one statement.
 
-# Installing
+## Installing
 
 `npm install testception --save-dev` or `bower install testception --save-dev`
 
@@ -34,7 +33,7 @@ Testception only has an `addMatchers` method which is available on the global `t
 If you prefer CommonJS, you could require testception by calling `var testception = require('testception');`
 Last but not least, testception is available as an ES6 module: `import {addMatchers} from 'testception';`
 
-# Documentation
+## Documentation
 
 First of all, you need the matcher in your test file. This is the object that is passed to Jasmine's `addMatchers` method.
 It is the `matcher` in `addMatchers({ matcherName: matcher })`.
@@ -72,12 +71,12 @@ call:
 expectMatcher.jasmineVersion = 1;
 ```
 
-# TODO
+## TODO
 
 - Injecting util and customEqualityTesters in tested matcher
 - Test custom negative comparators
 
-# Development
+## Development
 
 * `npm install`
 * `bower install`
