@@ -1,29 +1,15 @@
-var webpackConfig = file => ({ pattern: file, instrument: true, load: false, ignore: false });
-var wallabyFiles = require('test-runner-config').getWallabyFiles(require('./test/testFiles'), {
-  src: webpackConfig,
-  specs: webpackConfig
-});
-
-var wallabyWebpack = require('wallaby-webpack');
-var webpackPostprocessor = wallabyWebpack({});
+const wallabyWebpack = require('wallaby-webpack');
 
 module.exports = function (wallaby) {
   return {
-    files: wallabyFiles.files,
-    tests: wallabyFiles.tests,
+    files: [{ pattern: 'src/testception.js', load: false }],
+    tests: [{ pattern: 'test/spec/testception-spec.js', load: false }],
     compilers: {
       '**/*.js': wallaby.compilers.babel()
     },
-    postprocessor: webpackPostprocessor,
-
+    postprocessor: wallabyWebpack(),
     bootstrap: function () {
       window.__moduleBundler.loadTests();
-    },
-    env: {
-      runner: require('phantomjs-prebuilt').path,
-      params: {
-        runner: '--web-security=false'
-      }
     }
   };
 };

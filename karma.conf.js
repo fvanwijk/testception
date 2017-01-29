@@ -1,9 +1,3 @@
-var karmaFiles = require('test-runner-config').getKarmaFiles(require('./test/testFiles'), {
-  specs: function (file) { return { pattern: file, instrument: true, load: false, ignore: false }; }
-});
-
-karmaFiles.files.splice(0, 1); // remove src list because it is imported via the test file
-
 var webpack = require('webpack');
 module.exports = function (config) {
   config.set({
@@ -13,15 +7,7 @@ module.exports = function (config) {
       'src/**/*.js': ['webpack', 'coverage', 'sourcemap'],
       'test/spec/**/*.js': ['webpack', 'sourcemap']
     },
-    files: karmaFiles.files,
-    exclude: karmaFiles.exclude,
-    plugins: [
-      require('karma-jasmine'),
-      require('karma-webpack'), // This is used (instead of karma-babel-preprocessor) to make sure that commonJS modules can be loaded
-      require('karma-phantomjs-launcher'),
-      require('karma-coverage'),
-      require('karma-sourcemap-loader')
-    ],
+    files: ['test/spec/testception-spec.js'],
     webpack: {
       module: {
         loaders: [
@@ -37,20 +23,15 @@ module.exports = function (config) {
           }
         ]
       },
-      /*plugins: [
-        new webpack.SourceMapDevToolPlugin(
-          'dist/testception.js.map', null,
-          '[absolute-resource-path]', '[absolute-resource-path]')
-      ]*/
       devtool: 'inline-source-map'
     },
     reporters: ['progress', 'coverage'],
     coverageReporter: {
       dir: 'test/coverage',
       reporters: [
+        { type: 'html' },
         { type: 'lcov' },
-        { type: 'text-summary' },
-        { type: 'json' }
+        { type: 'text-summary' }
       ]
     },
     port: 8080,
