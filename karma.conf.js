@@ -18,7 +18,7 @@ module.exports = function (config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-webpack'), // This is used (instead of karma-babel-preprocessor) to make sure that commonJS modules can be loaded
-      require('karma-phantomjs2-launcher'),
+      require('karma-phantomjs-launcher'),
       require('karma-coverage'),
       require('karma-sourcemap-loader')
     ],
