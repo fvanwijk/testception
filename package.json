@@ -41,7 +41,7 @@
   "scripts": {
     "prepublish": "grunt && npm run webpack",
     "start": "webpack --config webpack.conf.js -w",
-    "test": "grunt test && npm run webpack",
+    "test": "grunt test",
     "webpack": "webpack --config webpack.conf.js"
   },
   "license": "MIT"

@@ -78,8 +78,7 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('build', ['clean', 'test']);
   grunt.registerTask('test', ['jscs', 'jshint', 'karma']);
-  grunt.registerTask('default', ['build']);
+  grunt.registerTask('default', ['clean', 'test']);
 
 };

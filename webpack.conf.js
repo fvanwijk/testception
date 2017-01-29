@@ -1,12 +1,15 @@
-var webpack = require('webpack');
-var path = require('path');
+const path = require('path');
+const webpack = require('webpack');
 
-var config = {
-  entry: __dirname + '/src/testception.js',
+module.exports = {
+  entry: {
+    'testception': __dirname + '/src/testception.js',
+    'testception.min': __dirname + '/src/testception.js'
+  },
   devtool: 'source-map',
   output: {
     path: __dirname + '/dist',
-    filename: 'testception.js',
+    filename: '[name].js',
     library: 'expectMatcher', // expectMatcher is the only default export. We use add-module-exports plugin to export this function as default
     libraryTarget: 'umd',
     umdNamedDefine: true
@@ -20,10 +23,15 @@ var config = {
       }
     ]
   },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      include: /\.min\.js$/,
+      compress: { warnings: false }
+    })
+  ],
   resolve: {
     root: path.resolve('./src'),
     extensions: ['', '.js']
   }
 };
-
-module.exports = config;
