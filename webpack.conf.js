@@ -1,15 +1,13 @@
 var webpack = require('webpack');
 var path = require('path');
-var libraryName = 'testception';
-var outputFile = libraryName + '.js';
 
 var config = {
   entry: __dirname + '/src/testception.js',
   devtool: 'source-map',
   output: {
     path: __dirname + '/dist',
-    filename: outputFile,
-    library: libraryName,
+    filename: 'testception.js',
+    library: 'expectMatcher', // expectMatcher is the only default export. We use add-module-exports plugin to export this function as default
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
@@ -18,7 +16,7 @@ var config = {
       {
         test: /\.js$/,
         loader: 'babel',
-        exclude: /(node_modules|bower_components)/
+        exclude: /(node_modules)/
       }
     ]
   },

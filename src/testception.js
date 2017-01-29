@@ -5,7 +5,7 @@
  * @param {Object} matcher to test
  * @returns {Object} test
  */
-export function expectMatcher(matcher) {
+export default function expectMatcher(matcher) {
   let test = {
     matcher: matcher
   };
