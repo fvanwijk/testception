@@ -15,7 +15,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
-    browsers: ['PhantomJS2'],
+    browsers: ['PhantomJS'],
     captureTimeout: 5000,
     singleRun: true,
     coverageReporter: {
