@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+
 const params = {
   production: {
     output: 'testception.min',
@@ -7,7 +8,7 @@ const params = {
       new webpack.optimize.UglifyJsPlugin({
         minimize: true,
         include: /\.min\.js$/,
-        compress: {warnings: false}
+        compress: { warnings: false }
       })
     ]
   },
@@ -20,11 +21,11 @@ const params = {
 function getConfig(env) {
   return {
     entry: {
-      [params[env].output]: __dirname + '/src/testception.js'
+      [params[env].output]: path.join(__dirname, '/src/testception.js')
     },
     devtool: params[env].devtool,
     output: {
-      path: __dirname + '/dist',
+      path: path.join(__dirname, '/dist'),
       filename: '[name].js',
       library: 'expectMatcher', // expectMatcher is the only default export. We use add-module-exports plugin to export this function as default
       libraryTarget: 'umd',

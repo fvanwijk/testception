@@ -7,7 +7,7 @@ import expectMatcher from './testception';
  */
 describe('the Testception DSL', () => {
   // These mock matchers pass when expected is true
-  const mockMatcher1 = jasmine.createSpy('Jasmine 1 matcher').and.callFake(function andCallFake(pass) {
+  const mockMatcher1 = jasmine.createSpy('Jasmine 1 matcher').and.callFake(function (pass) {
     this.message = () => ['jasmine 1 fail message', 'jasmine 1 pass message'];
     return pass;
   });
