@@ -39,7 +39,8 @@
     "webpack": "1.12.13"
   },
   "scripts": {
-    "prepublish": "grunt && npm run webpack",
+    "prepublish": "npm run webpack",
+    "preversion": "grunt && npm run webpack",
     "start": "webpack --config webpack.conf.js -w",
     "test": "grunt test",
     "webpack": "webpack --config webpack.conf.js"
