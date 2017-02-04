@@ -39,5 +39,6 @@
     "test": "eslint src && karma start",
     "webpack": "webpack --config webpack.conf.js"
   },
+  "message": "Bump version to v%s",
   "license": "MIT"
 }
