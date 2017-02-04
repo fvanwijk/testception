@@ -7,8 +7,13 @@
     "type": "git",
     "url": "git://github.com/fvanwijk/testception.git"
   },
+  "main": "./dist/testception.js",
   "dependencies": {},
   "devDependencies": {
+    "babel-core": "6.5.2",
+    "babel-loader": "6.2.2",
+    "babel-plugin-add-module-exports": "0.2.1",
+    "babel-preset-es2015": "6.5.0",
     "grunt": "1.0.1",
     "grunt-contrib-clean": "1.0.0",
     "grunt-contrib-concat": "1.0.1",
@@ -18,18 +23,27 @@
     "grunt-istanbul-coverage": "0.1.4",
     "grunt-jscs": "3.0.1",
     "grunt-karma": "2.0.0",
+    "isparta": "4.0.0",
+    "isparta-loader": "2.0.0",
     "jasmine-core": "2.5.2",
     "jshint-stylish": "2.2.1",
     "karma": "1.4.0",
+    "karma-babel-preprocessor": "6.0.1",
     "karma-coverage": "1.1.1",
     "karma-jasmine": "1.1.0",
     "karma-phantomjs-launcher": "1.0.2",
+    "karma-sourcemap-loader": "0.3.7",
+    "karma-webpack": "1.7.0",
     "load-grunt-tasks": "3.5.2",
-    "test-runner-config": "0.5.0"
+    "wallaby-webpack": "0.0.14",
+    "webpack": "1.12.13"
   },
   "scripts": {
-    "test": "grunt",
-    "prepublish": "grunt"
+    "prepublish": "npm run webpack",
+    "preversion": "grunt && npm run webpack",
+    "start": "webpack --config webpack.conf.js -w",
+    "test": "grunt test",
+    "webpack": "webpack --config webpack.conf.js"
   },
   "license": "MIT"
 }

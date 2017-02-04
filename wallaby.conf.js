@@ -1,8 +1,15 @@
-var wallabyFiles = require('test-runner-config').getWallabyFiles(require('./test/testFiles'));
+const wallabyWebpack = require('wallaby-webpack');
 
-module.exports = function () {
+module.exports = function (wallaby) {
   return {
-    files: wallabyFiles.files,
-    tests: wallabyFiles.tests
+    files: [{ pattern: 'src/testception.js', load: false }],
+    tests: [{ pattern: 'test/spec/testception-spec.js', load: false }],
+    compilers: {
+      '**/*.js': wallaby.compilers.babel()
+    },
+    postprocessor: wallabyWebpack(),
+    bootstrap: function () {
+      window.__moduleBundler.loadTests();
+    }
   };
 };

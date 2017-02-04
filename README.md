@@ -28,6 +28,10 @@ This DSL helps you with testing Jasmine 1 and 2 matchers by just using one state
 `npm install testception --save-dev` or `bower install testception --save-dev`
 
 Include dist/testception.min.js file in the files list of your test runner config file.
+Testception only has an `addMatchers` method which is available on the global `testception` variable.
+
+If you prefer CommonJS, you could require testception by calling `var testception = require('testception');`
+Last but not least, testception is available as an ES6 module: `import {addMatchers} from 'testception';`
 
 ## Documentation
 

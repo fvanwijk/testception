@@ -1,17 +1,19 @@
+'use strict';
+
 /**
  * DSL for testing Jasmine 2 matchers.
  * @param {Object} matcher to test
  * @returns {Object} test
  */
-var expectMatcher = function expectMatcher(matcher) {
-  var test = {
+export default function expectMatcher(matcher) {
+  let test = {
     matcher: matcher
   };
 
   function runTest() {
     if (expectMatcher.jasmineVersion === 2) {
-      var args = [test.actual].concat(test.expected);
-      expect(test.matcher().compare.apply(this, args))
+      let args = [test.actual].concat(test.expected);
+      expect(test.matcher().compare.apply(null, args))
         .toEqual({ pass: test.pass, message: test.expectedMessage });
     } else if (expectMatcher.jasmineVersion === 1) {
       expect(test.matcher.apply(test, test.expected)).toEqual(test.pass);
@@ -22,7 +24,7 @@ var expectMatcher = function expectMatcher(matcher) {
     }
   }
 
-  test.withActual = function (actual) {
+  test.withActual = actual => {
     test.actual = actual;
     return test;
   };
@@ -32,17 +34,17 @@ var expectMatcher = function expectMatcher(matcher) {
     return test;
   };
 
-  test.toPass = function () {
+  test.toPass = () => {
     test.pass = true;
     return test;
   };
 
-  test.toFail = function () {
+  test.toFail = () => {
     test.pass = false;
     return test;
   };
 
-  test.withMessage = function (message) {
+  test.withMessage = message => {
     test.expectedMessage = message;
 
     runTest();
@@ -50,12 +52,12 @@ var expectMatcher = function expectMatcher(matcher) {
     return test;
   };
 
-  test.withSameMessage = function () {
+  test.withSameMessage = () => {
     runTest();
     return test;
   };
 
   return test;
-};
+}
 
 expectMatcher.jasmineVersion = 2;
