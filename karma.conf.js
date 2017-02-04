@@ -8,7 +8,7 @@ module.exports = function (config) {
       'src/**/*.js': ['webpack', 'coverage', 'sourcemap'],
       'test/spec/**/*.js': ['webpack', 'sourcemap']
     },
-    files: ['test/spec/testception-spec.js'],
+    files: ['src/testception-spec.js'],
     webpack: {
       module: {
         loaders: [
@@ -18,8 +18,8 @@ module.exports = function (config) {
             loader: 'babel' // 'babel-loader' is also a legal name to reference
           },
           {
-            test: /\.js$/,
-            include: /src/,
+            test: /^(?!.*spec\.js?$).*\.js?$/,
+            include: /src\//,
             loader: 'isparta'
           }
         ]
@@ -28,7 +28,7 @@ module.exports = function (config) {
     },
     reporters: ['progress', 'coverage'],
     coverageReporter: {
-      dir: 'test/coverage',
+      dir: 'coverage',
       reporters: [
         { type: 'html' },
         { type: 'lcov' },

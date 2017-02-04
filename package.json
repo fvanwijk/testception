@@ -38,6 +38,7 @@
     "karma-sourcemap-loader": "0.3.7",
     "karma-webpack": "1.7.0",
     "load-grunt-tasks": "3.5.2",
+    "phantomjs-prebuilt": "2.1.14",
     "wallaby-webpack": "0.0.14",
     "webpack": "1.12.13"
   },
@@ -45,7 +46,7 @@
     "prepublish": "npm run webpack",
     "preversion": "grunt && npm run webpack",
     "start": "webpack --config webpack.conf.js -w",
-    "test": "eslint && karma karma.conf.js",
+    "test": "eslint src && karma start",
     "webpack": "webpack --config webpack.conf.js"
   },
   "license": "MIT"

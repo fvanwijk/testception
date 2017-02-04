@@ -1,4 +1,4 @@
-import expectMatcher from '../../src/testception';
+import expectMatcher from './testception';
 
 /**
  * For the specs to pass, simple incomplete examples are sufficient,
