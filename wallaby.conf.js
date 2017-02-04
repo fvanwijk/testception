@@ -8,7 +8,7 @@ module.exports = function (wallaby) {
       '**/*.js': wallaby.compilers.babel()
     },
     postprocessor: wallabyWebpack(),
-    bootstrap: function () {
+    bootstrap() {
       window.__moduleBundler.loadTests();
     }
   };

@@ -1,0 +1,13 @@
+{
+    "env": {
+        "jasmine": true,
+        "node": true
+    },
+    "extends": "airbnb-base",
+    "plugins": [
+        "import"
+    ],
+    "rules": {
+        "comma-dangle": ["error", "never"]
+    }
+}

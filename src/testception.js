@@ -1,36 +1,32 @@
-'use strict';
-
 /**
  * DSL for testing Jasmine 2 matchers.
  * @param {Object} matcher to test
  * @returns {Object} test
  */
 export default function expectMatcher(matcher) {
-  let test = {
-    matcher: matcher
-  };
+  const test = { matcher };
 
   function runTest() {
     if (expectMatcher.jasmineVersion === 2) {
-      let args = [test.actual].concat(test.expected);
+      const args = [test.actual].concat(test.expected);
       expect(test.matcher().compare.apply(null, args))
         .toEqual({ pass: test.pass, message: test.expectedMessage });
     } else if (expectMatcher.jasmineVersion === 1) {
-      expect(test.matcher.apply(test, test.expected)).toEqual(test.pass);
+      expect(test.matcher(...test.expected)).toEqual(test.pass);
       // Jasmine 1 adds the message to 'this' (the test in this case)
       expect(test.message()[test.pass ? 1 : 0]).toEqual(test.expectedMessage);
     } else {
-      throw Error('Incorrect Jasmine version specified: ' + expectMatcher.jasmineVersion);
+      throw Error(`Incorrect Jasmine version specified: ${expectMatcher.jasmineVersion}`);
     }
   }
 
-  test.withActual = actual => {
+  test.withActual = (actual) => {
     test.actual = actual;
     return test;
   };
 
-  test.andExpected = function (expected) {
-    test.expected = Array.prototype.slice.call(arguments, 0);
+  test.andExpected = (...args) => {
+    test.expected = args;
     return test;
   };
 
@@ -44,7 +40,7 @@ export default function expectMatcher(matcher) {
     return test;
   };
 
-  test.withMessage = message => {
+  test.withMessage = (message) => {
     test.expectedMessage = message;
 
     runTest();
