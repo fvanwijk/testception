@@ -32,12 +32,14 @@
     "webpack": "1.12.13"
   },
   "scripts": {
+    "build": "webpack --config webpack.conf.js",
     "clean": "del dist coverage",
-    "prepublish": "npm run webpack",
-    "preversion": "npm run clean && npm run test && npm run webpack",
+    "lint:js": "eslint . --color",
+    "prepublish": "npm run build",
+    "preversion": "npm run clean && npm run test && npm run build",
+    "qa": "npm run lint:js && npm run test:unit",
     "start": "webpack --config webpack.conf.js -w",
-    "test": "eslint src && karma start",
-    "webpack": "webpack --config webpack.conf.js"
+    "test:unit": "karma start"
   },
   "message": "Bump version to v%s",
   "license": "MIT"
