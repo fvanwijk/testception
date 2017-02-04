@@ -1,4 +1,4 @@
-import expectMatcher from '../../src/testception';
+import expectMatcher from './testception';
 
 /**
  * For the specs to pass, simple incomplete examples are sufficient,
@@ -6,34 +6,26 @@ import expectMatcher from '../../src/testception';
  * all specs need to be full working examples.
  */
 describe('the Testception DSL', () => {
-
   // These mock matchers pass when expected is true
-  const mockMatcher1 = jasmine.createSpy('Jasmine 1 matcher').and.callFake(function (pass) {
-    this.message = () => {
-      return ['jasmine 1 fail message', 'jasmine 1 pass message'];
-    };
+  const mockMatcher1 = jasmine.createSpy('Jasmine 1 matcher').and.callFake(function andCallFake(pass) {
+    this.message = () => ['jasmine 1 fail message', 'jasmine 1 pass message'];
     return pass;
   });
 
-  const compareSpy = jasmine.createSpy('Compare function for jasmine 2 matcher').and.callFake(function (actual, pass) {
-    return {
-      pass: pass,
-      message: 'jasmine 2 pass message'
-    };
-  });
-  const mockMatcher2 = () => ({
-    compare: compareSpy
-  });
+  const compareSpy = jasmine.createSpy('Compare function for jasmine 2 matcher').and.callFake((actual, pass) => ({
+    pass,
+    message: 'jasmine 2 pass message'
+  }));
+  const mockMatcher2 = () => ({ compare: compareSpy });
 
   describe('the jasmine version', () => {
-
     it('should test matchers for jasmine 2 by default', () => {
       expect(expectMatcher.jasmineVersion).toBe(2);
     });
 
     it('should throw an error when the jasmine version is not 1 or 2', () => {
       expectMatcher.jasmineVersion = 0;
-      expect(expectMatcher().withSameMessage).toThrowError(Error, 'Incorrect Jasmine version specified: ' + 0);
+      expect(expectMatcher().withSameMessage).toThrowError(Error, 'Incorrect Jasmine version specified: 0');
       expectMatcher.jasmineVersion = 2;
     });
   });
@@ -61,7 +53,6 @@ describe('the Testception DSL', () => {
   });
 
   describe('when passing the message', () => {
-
     it('should set the message', () => {
       expect(expectMatcher(mockMatcher2)
         .andExpected(true)
@@ -75,7 +66,7 @@ describe('the Testception DSL', () => {
       });
 
       it('should test the matcher with given parameters', () => {
-        var expected = true;
+        const expected = true;
         expectMatcher(mockMatcher1)
           .withActual('actual')
           .andExpected(expected)
@@ -91,9 +82,8 @@ describe('the Testception DSL', () => {
     });
 
     describe('and when the matcher is for Jasmine 2', () => {
-
       it('should test the matcher with given parameters', () => {
-        var expected = true;
+        const expected = true;
         expectMatcher(mockMatcher2)
           .withActual('actual')
           .andExpected(expected)
@@ -106,15 +96,14 @@ describe('the Testception DSL', () => {
   });
 
   describe('when requesting a new test with the same message', () => {
-
     describe('and when the matcher is for Jasmine 1', () => {
       beforeAll(() => {
         expectMatcher.jasmineVersion = 1;
       });
 
       it('should return the pass message when it passes', () => {
-        var expected = true;
-        var test = expectMatcher(mockMatcher1)
+        const expected = true;
+        const test = expectMatcher(mockMatcher1)
           .withActual('actual')
           .andExpected(expected)
           .toPass()
@@ -127,8 +116,8 @@ describe('the Testception DSL', () => {
       });
 
       it('should return the fail message when it fails', () => {
-        var expected = false;
-        var test = expectMatcher(mockMatcher1)
+        const expected = false;
+        const test = expectMatcher(mockMatcher1)
           .withActual('actual')
           .andExpected(expected)
           .toFail()
@@ -146,10 +135,9 @@ describe('the Testception DSL', () => {
     });
 
     describe('and when the matcher is for Jasmine 2', () => {
-
       it('should rerun the test', () => {
-        var expected = true;
-        var test = expectMatcher(mockMatcher2)
+        const expected = true;
+        const test = expectMatcher(mockMatcher2)
           .withActual('actual')
           .andExpected(expected)
           .toPass()
@@ -161,7 +149,5 @@ describe('the Testception DSL', () => {
         expect(compareSpy).toHaveBeenCalledWith('actual', expected);
       });
     });
-
   });
-
 });

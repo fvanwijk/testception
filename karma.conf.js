@@ -1,38 +1,46 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
+
 module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
     preprocessors: {
-      'src/**/*.js': ['webpack', 'coverage', 'sourcemap'],
-      'test/spec/**/*.js': ['webpack', 'sourcemap']
+      'src/**/testception.js': ['coverage'],
+      'src/**/testception-spec.js': ['webpack']
     },
-    files: ['test/spec/testception-spec.js'],
+    files: ['src/testception-spec.js'],
     webpack: {
       module: {
         loaders: [
           {
             test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'babel' // 'babel-loader' is also a legal name to reference
+            loader: 'babel'
           },
           {
-            test: /\.js$/,
+            test: /testception\.js$/,
             include: /src/,
             loader: 'isparta'
           }
         ]
-      },
-      devtool: 'inline-source-map'
+      }
     },
     reporters: ['progress', 'coverage'],
     coverageReporter: {
-      dir: 'test/coverage',
+      dir: 'coverage',
+      subdir: '.',
       reporters: [
         { type: 'html' },
-        { type: 'lcov' },
         { type: 'text-summary' }
-      ]
+      ],
+      check: {
+        each: {
+          statements: 100,
+          branches: 100,
+          functions: 100,
+          lines: 100
+        }
+      }
     },
     port: 8080,
     runnerPort: 9100,
