@@ -5,8 +5,8 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     preprocessors: {
-      'src/**/*.js': ['webpack', 'coverage', 'sourcemap'],
-      'test/spec/**/*.js': ['webpack', 'sourcemap']
+      'src/**/testception.js': ['coverage'],
+      'src/**/testception-spec.js': ['webpack']
     },
     files: ['src/testception-spec.js'],
     webpack: {
@@ -15,16 +15,15 @@ module.exports = function (config) {
           {
             test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'babel' // 'babel-loader' is also a legal name to reference
+            loader: 'babel'
           },
           {
-            test: /^(?!.*spec\.js?$).*\.js?$/,
-            include: /src\//,
+            test: /testception\.js$/,
+            include: /src/,
             loader: 'isparta'
           }
         ]
-      },
-      devtool: 'inline-source-map'
+      }
     },
     reporters: ['progress', 'coverage'],
     coverageReporter: {
@@ -33,7 +32,15 @@ module.exports = function (config) {
       reporters: [
         { type: 'html' },
         { type: 'text-summary' }
-      ]
+      ],
+      check: {
+        each: {
+          statements: 100,
+          branches: 100,
+          functions: 100,
+          lines: 100
+        }
+      }
     },
     port: 8080,
     runnerPort: 9100,
