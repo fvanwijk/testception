@@ -36,8 +36,7 @@
     "clean": "del dist coverage",
     "lint:js": "eslint . --color",
     "prepublish": "npm run build",
-    "preversion": "npm run clean && npm run test && npm run build",
-    "postversion": "bower version",
+    "preversion": "npm run clean && npm run qa && npm run build",
     "qa": "npm run lint:js && npm run test:unit",
     "start": "webpack --config webpack.conf.js -w",
     "test:unit": "karma start"
