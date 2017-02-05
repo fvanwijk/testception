@@ -42,6 +42,5 @@
     "start": "webpack --config webpack.conf.js -w",
     "test:unit": "karma start"
   },
-  "message": "Bump version to v%s",
   "license": "MIT"
 }
