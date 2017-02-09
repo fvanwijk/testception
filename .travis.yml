@@ -3,5 +3,7 @@ node_js:
   - 6.9
 before_script:
   - npm install -g codeclimate-test-reporter
+script:
+  - npm run qa
 after_script:
   - codeclimate-test-reporter < coverage/*/lcov.info
