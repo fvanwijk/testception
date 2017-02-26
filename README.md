@@ -1,5 +1,7 @@
 # Testception
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/fvanwijk/testception.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/fvanwijk/testception.svg?branch=master)](https://travis-ci.org/fvanwijk/testception)
 [![Test Coverage](https://codeclimate.com/github/fvanwijk/testception/badges/coverage.svg)](https://codeclimate.com/github/fvanwijk/testception)
 [![Code Climate](https://codeclimate.com/github/fvanwijk/testception/badges/gpa.svg)](https://codeclimate.com/github/fvanwijk/testception)
