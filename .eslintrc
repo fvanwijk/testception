@@ -9,11 +9,9 @@
     "sourceType": "module"
   },
   "extends": ["plugin:prettier/recommended"],
-  "plugins": ["import", "prettier"],
+  "plugins": ["prettier"],
   "rules": {
     "func-names": [2, "never"],
-    "import/no-extraneous-dependencies": [2, { "devDependencies": true }],
-    "no-underscore-dangle": [2, { "allow": ["__moduleBundler"] }],
     "prettier/prettier": "error"
   }
 }
