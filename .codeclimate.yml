@@ -2,3 +2,4 @@ version: 2
 plugins:
   eslint:
     enabled: true
+    channel: 'eslint-5'
