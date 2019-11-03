@@ -7,15 +7,19 @@ import expectMatcher from './testception';
  */
 describe('the Testception DSL', () => {
   // These mock matchers pass when expected is true
-  const mockMatcher1 = jasmine.createSpy('Jasmine 1 matcher').and.callFake(function (pass) {
-    this.message = () => ['jasmine 1 fail message', 'jasmine 1 pass message'];
-    return pass;
-  });
+  const mockMatcher1 = jasmine
+    .createSpy('Jasmine 1 matcher')
+    .and.callFake(function(pass) {
+      this.message = () => ['jasmine 1 fail message', 'jasmine 1 pass message'];
+      return pass;
+    });
 
-  const compareSpy = jasmine.createSpy('Compare function for jasmine 2 matcher').and.callFake((actual, pass) => ({
-    pass,
-    message: 'jasmine 2 pass message'
-  }));
+  const compareSpy = jasmine
+    .createSpy('Compare function for jasmine 2 matcher')
+    .and.callFake((actual, pass) => ({
+      pass,
+      message: 'jasmine 2 pass message'
+    }));
   const mockMatcher2 = () => ({ compare: compareSpy });
 
   describe('the jasmine version', () => {
@@ -25,7 +29,10 @@ describe('the Testception DSL', () => {
 
     it('should throw an error when the jasmine version is not 1 or 2', () => {
       expectMatcher.jasmineVersion = 0;
-      expect(expectMatcher().withSameMessage).toThrowError(Error, 'Incorrect Jasmine version specified: 0');
+      expect(expectMatcher().withSameMessage).toThrowError(
+        Error,
+        'Incorrect Jasmine version specified: 0'
+      );
       expectMatcher.jasmineVersion = 2;
     });
   });
@@ -39,7 +46,9 @@ describe('the Testception DSL', () => {
   });
 
   it('should set the expected', () => {
-    expect(expectMatcher().andExpected('expected', 'more-args').expected).toEqual(['expected', 'more-args']);
+    expect(
+      expectMatcher().andExpected('expected', 'more-args').expected
+    ).toEqual(['expected', 'more-args']);
   });
 
   describe('when you expect a pass or fail', () => {
@@ -54,10 +63,12 @@ describe('the Testception DSL', () => {
 
   describe('when passing the message', () => {
     it('should set the message', () => {
-      expect(expectMatcher(mockMatcher2)
-        .andExpected(true)
-        .toPass()
-        .withMessage('jasmine 2 pass message').expectedMessage).toBe('jasmine 2 pass message');
+      expect(
+        expectMatcher(mockMatcher2)
+          .andExpected(true)
+          .toPass()
+          .withMessage('jasmine 2 pass message').expectedMessage
+      ).toBe('jasmine 2 pass message');
     });
 
     describe('and when the matcher is for Jasmine 1', () => {

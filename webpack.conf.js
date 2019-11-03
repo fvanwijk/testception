@@ -48,7 +48,4 @@ function getConfig(env) {
   };
 }
 
-module.exports = [
-  getConfig('development'),
-  getConfig('production')
-];
+module.exports = [getConfig('development'), getConfig('production')];
