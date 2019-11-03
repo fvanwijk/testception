@@ -30,7 +30,7 @@ module.exports = function(config) {
     coverageIstanbulReporter: {
       dir: 'coverage',
       subdir: '.',
-      reports: ['html', 'text-summary'],
+      reports: ['html', 'text-summary', 'lcov'],
       thresholds: {
         each: {
           statements: 100,
