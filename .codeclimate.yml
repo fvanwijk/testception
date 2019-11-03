@@ -1,7 +1,5 @@
-engines:
+version: 2
+plugins:
   eslint:
-    enabled: true,
-    channel: "eslint-3"
-ratings:
-  paths:
-  - "src/**/*"
+    enabled: true
+    channel: 'eslint-5'
