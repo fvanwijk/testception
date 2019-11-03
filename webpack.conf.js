@@ -1,18 +1,21 @@
 const path = require('path');
 const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const params = {
   production: {
+    mode: 'production',
     output: 'testception.min',
-    plugins: [
-      new webpack.optimize.UglifyJsPlugin({
-        minimize: true,
-        include: /\.min\.js$/,
-        compress: { warnings: false }
-      })
-    ]
+    optimization: {
+      minimizer: [
+        new UglifyJsPlugin({
+          include: /\.min\.js$/
+        })
+      ]
+    }
   },
   development: {
+    mode: 'development',
     output: 'testception',
     devtool: 'inline-source-map'
   }
@@ -20,6 +23,7 @@ const params = {
 
 function getConfig(env) {
   return {
+    mode: params[env].mode,
     entry: {
       [params[env].output]: path.join(__dirname, '/src/testception.js')
     },
@@ -32,23 +36,16 @@ function getConfig(env) {
       umdNamedDefine: true
     },
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.js$/,
-          loader: 'babel',
+          loader: 'babel-loader',
           exclude: /(node_modules)/
         }
       ]
     },
-    plugins: params[env].plugins,
-    resolve: {
-      root: path.resolve('./src'),
-      extensions: ['', '.bjs']
-    }
+    plugins: params[env].plugins
   };
 }
 
-module.exports = [
-  getConfig('development'),
-  getConfig('production')
-];
+module.exports = [getConfig('development'), getConfig('production')];

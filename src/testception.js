@@ -9,18 +9,22 @@ export default function expectMatcher(matcher) {
   function runTest() {
     if (expectMatcher.jasmineVersion === 2) {
       const args = [test.actual].concat(test.expected);
-      expect(test.matcher().compare.apply(null, args))
-        .toEqual({ pass: test.pass, message: test.expectedMessage });
+      expect(test.matcher().compare.apply(null, args)).toEqual({
+        pass: test.pass,
+        message: test.expectedMessage
+      });
     } else if (expectMatcher.jasmineVersion === 1) {
       expect(test.matcher(...test.expected)).toEqual(test.pass);
       // Jasmine 1 adds the message to 'this' (the test in this case)
       expect(test.message()[test.pass ? 1 : 0]).toEqual(test.expectedMessage);
     } else {
-      throw Error(`Incorrect Jasmine version specified: ${expectMatcher.jasmineVersion}`);
+      throw Error(
+        `Incorrect Jasmine version specified: ${expectMatcher.jasmineVersion}`
+      );
     }
   }
 
-  test.withActual = (actual) => {
+  test.withActual = actual => {
     test.actual = actual;
     return test;
   };
@@ -40,7 +44,7 @@ export default function expectMatcher(matcher) {
     return test;
   };
 
-  test.withMessage = (message) => {
+  test.withMessage = message => {
     test.expectedMessage = message;
 
     runTest();

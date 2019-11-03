@@ -1,37 +1,37 @@
-module.exports = function (config) {
+const path = require('path');
+
+module.exports = function(config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
-    preprocessors: {
-      'src/**/testception.js': ['coverage'],
-      'src/**/testception-spec.js': ['webpack']
-    },
+    preprocessors: { 'src/testception-spec.js': ['webpack'] },
     files: ['src/testception-spec.js'],
     webpack: {
+      mode: 'none',
       module: {
-        loaders: [
+        rules: [
           {
             test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'babel'
+            loader: 'babel-loader'
           },
           {
-            test: /testception\.js$/,
-            include: /src/,
-            loader: 'isparta'
+            test: /\.js$/,
+            use: {
+              loader: 'istanbul-instrumenter-loader',
+              options: { esModules: true }
+            },
+            include: path.resolve('src/')
           }
         ]
       }
     },
-    reporters: ['progress', 'coverage'],
-    coverageReporter: {
+    reporters: ['progress', 'coverage-istanbul'],
+    coverageIstanbulReporter: {
       dir: 'coverage',
       subdir: '.',
-      reporters: [
-        { type: 'html' },
-        { type: 'text-summary' }
-      ],
-      check: {
+      reports: ['html', 'text-summary'],
+      thresholds: {
         each: {
           statements: 100,
           branches: 100,
@@ -45,7 +45,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
-    browsers: ['PhantomJS'],
+    browsers: ['jsdom'],
     captureTimeout: 5000,
     singleRun: true
   });
