@@ -25,9 +25,8 @@
     "karma-babel-preprocessor": "6.0.1",
     "karma-coverage": "1.1.1",
     "karma-jasmine": "1.1.0",
-    "karma-phantomjs-launcher": "1.0.2",
+    "karma-jsdom-launcher": "8.0.0",
     "karma-webpack": "1.7.0",
-    "phantomjs-prebuilt": "2.1.14",
     "wallaby-webpack": "0.0.14",
     "webpack": "1.12.13"
   },
