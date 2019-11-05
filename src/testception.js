@@ -14,7 +14,7 @@ export default function expectMatcher(matcher) {
         message: test.expectedMessage
       });
     } else if (expectMatcher.jasmineVersion === 1) {
-      expect(test.matcher(...test.expected)).toEqual(test.pass);
+      expect(test.matcher.apply(test, test.expected)).toEqual(test.pass);
       // Jasmine 1 adds the message to 'this' (the test in this case)
       expect(test.message()[test.pass ? 1 : 0]).toEqual(test.expectedMessage);
     } else {

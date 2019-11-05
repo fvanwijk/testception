@@ -1,1 +1,7 @@
+.idea
+.codeclimate.yml
+.travis.yml
+.npmignore
+.gitignore
 !dist
+coverage
